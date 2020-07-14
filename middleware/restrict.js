@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const users = require("../users/user-model")
 
 function restrict() {
 	return async (req, res, next) => {
@@ -13,7 +14,7 @@ function restrict() {
 				return res.status(401).json(authError)
 			}
 
-			// checks to make sure the signature is valid and the token is not expired
+			//checks to make sure the signature is valid and the token is not expired
 			jwt.verify(token, "secret secret", (err, decoded) => {
 				if (err) {
 					return res.status(401).json(authError)
